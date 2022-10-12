@@ -17,8 +17,4 @@ const HeaderBar = ({ title, children }: HeaderBarProps) => {
   );
 };
 
-export function add(a: number, b: number) {
-  return a + b;
-}
-
 export default HeaderBar;

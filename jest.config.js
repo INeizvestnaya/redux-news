@@ -12,6 +12,12 @@ module.exports = {
   },
   coverageDirectory: 'coverage',
   collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}'],
+  modulePathIgnorePatterns: [
+    'index.ts',
+    'index.tsx',
+    'react-app-env.d.ts',
+    'reportWebVitals.ts'
+  ],
   coverageThreshold: {
     global: {
       branches: 0,
@@ -21,6 +27,7 @@ module.exports = {
     }
   },
   transform: {
-    '\\.[jt]sx?$': 'babel-jest'
+    '^.+\\.tsx$': 'ts-jest',
+    '^.+\\.ts$': 'ts-jest'
   }
 };

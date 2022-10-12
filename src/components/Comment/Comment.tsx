@@ -30,6 +30,7 @@ const Comment = ({
         style={{ transform: `translate(${translate}px)` }}
         key={id}
         onClick={() => openNestedComments(id)}
+        data-testid="comment"
       >
         <div>
           <strong>{by}</strong>: {text}
