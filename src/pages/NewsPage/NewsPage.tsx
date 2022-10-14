@@ -60,7 +60,7 @@ const NewsPage = () => {
         <HeaderButton extraProps={{ onClick: reloadComments }}>
           Reload
         </HeaderButton>
-        <a href="/news-redux" style={{ textDecoration: 'none' }}>
+        <a href="/redux-news" style={{ textDecoration: 'none' }}>
           <HeaderButton>Back</HeaderButton>
         </a>
       </HeaderBar>

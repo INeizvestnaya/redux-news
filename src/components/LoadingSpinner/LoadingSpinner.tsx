@@ -6,7 +6,7 @@ const LoadingSpinner = () => {
   const theme = useContext(ThemeContext);
 
   return (
-    <div className="w-100 m-5 text-center">
+    <div data-testid="spinner" className="w-100 m-5 text-center">
       <Spinner animation="border" variant={theme.theme.spinner}></Spinner>
     </div>
   );

@@ -11,6 +11,7 @@ describe('NewsPage', () => {
       </Provider>
     );
 
-    screen.debug();
+    const spinner = screen.getByTestId('spinner');
+    expect(spinner).toBeDefined();
   });
 });

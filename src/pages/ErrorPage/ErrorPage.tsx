@@ -10,7 +10,7 @@ const ErrorPage = () => {
   return (
     <>
       <HeaderBar title="">
-        <Link to="/news-redux" style={{ textDecoration: 'none' }}>
+        <Link to="/redux-news" style={{ textDecoration: 'none' }}>
           <HeaderButton extraProps={{ className: theme.theme.mainText }}>
             Main page
           </HeaderButton>

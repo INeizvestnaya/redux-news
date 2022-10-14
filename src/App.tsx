@@ -14,8 +14,8 @@ const App = () => {
     <ErrorBoundary>
       <div className={theme.theme.background} style={{ minHeight: '100vh' }}>
         <Switch>
-        <Redirect exact from="/" to="/news-redux" />
-          <Route path="/news-redux">
+          <Redirect exact from="/" to="/redux-news" />
+          <Route path="/redux-news">
             <Main />
           </Route>
           <Route path="/news/:id">
