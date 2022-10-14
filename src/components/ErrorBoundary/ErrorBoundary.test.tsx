@@ -13,7 +13,7 @@ describe('ErrorBoundary', () => {
     expect(output).toBeDefined();
   });
 
-  /*it('should render error fallback for error', () => {
+  it('should render error fallback for error', () => {
     const ThrowError = () => {
       throw new Error('Test');
     };
@@ -26,5 +26,5 @@ describe('ErrorBoundary', () => {
 
     const output = screen.getByText(/Error! Reload the page/);
     expect(output).toBeDefined();
-  });*/
+  });
 });

@@ -63,10 +63,10 @@ describe('Comment', () => {
     expect(defaultProps.openNestedComments).toHaveBeenCalled();
   });
 
-  /*it('should render nested comments', () => {
+  it('should render nested comments', async () => {
     render(<Comment {...defaultProps} nestedComments={nestedComments} />);
 
-    const comments = screen.findAllByTestId('comment');
+    const comments = await screen.findAllByTestId('comment');
     expect(comments).toHaveLength(3);
-  });*/
+  });
 });

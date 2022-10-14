@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { Card } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import ThemeContext from '../../context';
 import { NewsType } from '../../types';
 
@@ -8,8 +7,8 @@ const NewsList = ({ title, score, by, time, id }: NewsType) => {
   const theme = useContext(ThemeContext);
 
   return (
-    <Link
-      to={`/news/${id}`}
+    <a
+      href={`/news/${id}`}
       className={theme.theme.mainText}
       style={{ textDecoration: 'none' }}
     >
@@ -25,7 +24,7 @@ const NewsList = ({ title, score, by, time, id }: NewsType) => {
           <div>{new Date(time * 1000).toDateString()}</div>
         </Card.Text>
       </Card>
-    </Link>
+    </a>
   );
 };
 
