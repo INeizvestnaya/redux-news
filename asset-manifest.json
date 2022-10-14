@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/redux-news/static/css/main.4ea24607.css",
+    "main.js": "/redux-news/static/js/main.513f7ca9.js",
+    "static/js/787.ff8aaa34.chunk.js": "/redux-news/static/js/787.ff8aaa34.chunk.js",
+    "index.html": "/redux-news/index.html",
+    "main.4ea24607.css.map": "/redux-news/static/css/main.4ea24607.css.map",
+    "main.513f7ca9.js.map": "/redux-news/static/js/main.513f7ca9.js.map",
+    "787.ff8aaa34.chunk.js.map": "/redux-news/static/js/787.ff8aaa34.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4ea24607.css",
+    "static/js/main.513f7ca9.js"
+  ]
+}
