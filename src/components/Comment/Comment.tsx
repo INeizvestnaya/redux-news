@@ -1,6 +1,8 @@
 import { useContext } from 'react';
-import ThemeContext from '../../context';
-import { Comment as CommentType } from './../../types';
+
+import ThemeContext from '@/context';
+import { Comment as CommentType } from '@/interfaces';
+import representDate from '@/utils/representDate';
 
 interface CommentProps {
   id: number;
@@ -23,23 +25,25 @@ const Comment = ({
 }: CommentProps) => {
   const theme = useContext(ThemeContext);
 
+  const handleCommentClick = () => {
+    openNestedComments(id);
+  };
+
   return (
     <>
       <div
         className={`${theme.theme.newsBackground} ${theme.theme.mainText} mx-4 my-2 border border-secondary rounded p-2`}
         style={{ transform: `translate(${translate}px)` }}
         key={id}
-        onClick={() => openNestedComments(id)}
+        onClick={handleCommentClick}
         data-testid="comment"
       >
-        <div>
+        <span>
           <strong>{by}</strong>: {text}
-        </div>
-        <div className="text-end mt-1">
-          {new Date(time * 1000).toDateString()}
-        </div>
+        </span>
+        <div className="text-end mt-1">{representDate(time)}</div>
       </div>
-      {nestedComments !== undefined &&
+      {nestedComments &&
         nestedComments.map((nested) => (
           <Comment
             key={nested.id}

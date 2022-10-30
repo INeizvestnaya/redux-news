@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useEffect,useState } from 'react';
 
 interface ContextType {
   theme: {
@@ -47,8 +47,17 @@ const ThemeContext = React.createContext<ContextType>({
   }
 });
 
+const initialTheme = localStorage.getItem('newsTheme');
+
+const setInitialTheme = () =>
+  initialTheme === 'light' ? lightTheme : darkTheme;
+
 export const ThemeContextProvider = ({ children }: ContextProps) => {
-  const [theme, setTheme] = useState(lightTheme);
+  const [theme, setTheme] = useState(setInitialTheme);
+
+  useEffect(() => {
+    localStorage.setItem('newsTheme', theme.name);
+  }, [theme]);
 
   const changeTheme = () => {
     setTheme((prevState) => {

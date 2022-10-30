@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 import Spinner from 'react-bootstrap/Spinner';
+
 import LoadingSpinner from './LoadingSpinner';
 
 describe('LoadingSpinner', () => {

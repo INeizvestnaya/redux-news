@@ -1,5 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import { ThemeContextProvider } from '../../context';
+
+import { ThemeContextProvider } from '@/context';
+import representDate from '@/utils/representDate';
+
 import NewsList from './NewsList';
 
 const defaultProps = {
@@ -32,7 +35,7 @@ describe.only('NewsList', () => {
     );
     expect(rating).toBeDefined();
 
-    const stringDate = new Date(defaultProps.time * 1000).toDateString();
+    const stringDate = representDate(defaultProps.time);
     const time = screen.getByText(new RegExp(stringDate));
     expect(time).toBeDefined();
   });

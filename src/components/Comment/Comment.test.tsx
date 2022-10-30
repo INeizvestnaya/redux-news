@@ -1,4 +1,7 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent,render, screen } from '@testing-library/react';
+
+import representDate from '@/utils/representDate';
+
 import Comment from './Comment';
 
 type HeaderBarProps = React.ComponentProps<typeof Comment>;
@@ -50,7 +53,7 @@ describe('Comment', () => {
     const author = screen.findByText(new RegExp(defaultProps.by));
     expect(author).toBeDefined();
 
-    const stringDate = new Date(defaultProps.time * 1000).toDateString();
+    const stringDate = representDate(defaultProps.time);
     const time = screen.findByText(new RegExp(stringDate));
     expect(time).toBeDefined();
   });

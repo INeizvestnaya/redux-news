@@ -1,5 +1,7 @@
-import { State, Action, NewsType } from '../../types';
-import { ActionTypes } from '../../constants';
+import { ActionTypes } from '@/constants';
+import { NewsType } from '@/interfaces';
+
+import { Action,State } from '../interfaces';
 
 const initialState = {
   newsData: [],
@@ -23,7 +25,7 @@ const rootReducer = (state: State = initialState, action: Action): State => {
         newsPage: action.payload.news
       };
     case ActionTypes.SET_COMMENTS: {
-      if (state.newsPage.comments !== undefined) {
+      if (state.newsPage.comments) {
         return {
           ...state,
           newsPage: {

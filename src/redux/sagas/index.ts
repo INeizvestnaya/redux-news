@@ -1,7 +1,8 @@
 import { all } from 'redux-saga/effects';
-import loadWatcherSaga from './NewsSaga';
-import newsPageWatcherSaga from './NewsPageSaga';
+
 import nestedCommentsWatcherSaga from './NestedCommentsSaga';
+import newsPageWatcherSaga from './NewsPageSaga';
+import loadWatcherSaga from './NewsSaga';
 
 export default function* rootSaga() {
   yield all([

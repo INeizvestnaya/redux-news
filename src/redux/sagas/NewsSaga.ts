@@ -1,7 +1,8 @@
 import { call, put, spawn, takeLeading } from 'redux-saga/effects';
-import sendRequest from '../../utils/sendRequest';
-import { NewsType } from '../../types';
-import { ActionTypes } from './../../constants';
+
+import { ActionTypes } from '@/constants';
+import { NewsType } from '@/interfaces';
+import sendRequest from '@/utils/sendRequest';
 
 function* loadNews(id: number) {
   const newsItem: NewsType = yield call(

@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
+
 import ThemeContext from '../../context';
 
 const LoadingSpinner = () => {

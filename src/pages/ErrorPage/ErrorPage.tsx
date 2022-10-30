@@ -1,8 +1,10 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import ThemeContext from '../../context';
-import HeaderBar from '../../components/HeaderBar';
-import HeaderButton from '../../components/HeaderButton';
+
+import HeaderBar from '@/components/HeaderBar';
+import HeaderButton from '@/components/HeaderButton';
+import { PATHS } from '@/constants';
+import ThemeContext from '@/context';
 
 const ErrorPage = () => {
   const theme = useContext(ThemeContext);
@@ -10,15 +12,15 @@ const ErrorPage = () => {
   return (
     <>
       <HeaderBar title="">
-        <Link to="/redux-news" style={{ textDecoration: 'none' }}>
+        <Link to={PATHS.MAIN} className="text-decoration-none">
           <HeaderButton extraProps={{ className: theme.theme.mainText }}>
             Main page
           </HeaderButton>
         </Link>
       </HeaderBar>
-      <div className={`text-center fs-2 m-4 ${theme.theme.mainText}`}>
+      <p className={`text-center fs-2 m-4 ${theme.theme.mainText}`}>
         This page doesn't exist
-      </div>
+      </p>
     </>
   );
 };

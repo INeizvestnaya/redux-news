@@ -1,7 +1,10 @@
-import { call, put, takeLeading, spawn, join } from 'redux-saga/effects';
-import sendRequest from '../../utils/sendRequest';
-import { ActionTypes } from '../../constants';
-import { LoadNewsPage, NewsType, Comment } from './../../types';
+import { call, join,put, spawn, takeLeading } from 'redux-saga/effects';
+
+import { ActionTypes } from '@/constants';
+import { Comment,NewsType } from '@/interfaces';
+import sendRequest from '@/utils/sendRequest';
+
+import { LoadNewsPage } from '../interfaces';
 
 function* loadComments(id: number) {
   const comment: Comment = yield call(
@@ -23,7 +26,7 @@ function* loadNewsPageSaga(action: LoadNewsPage): any {
 
   const comments = news.kids;
   let spawnRes;
-  if (comments !== undefined) {
+  if (comments) {
     for (let i = 0; i < comments.length; i++) {
       spawnRes = yield spawn(loadComments, comments[i]);
     }

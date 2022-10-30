@@ -1,7 +1,9 @@
-import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+
+import store from '@/redux/store';
+
 import NewsPage from './NewsPage';
-import store from './../../redux';
 
 describe('NewsPage', () => {
   it('should render component with correct ui', () => {

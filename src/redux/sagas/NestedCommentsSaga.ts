@@ -1,15 +1,17 @@
 import { Task } from 'redux-saga';
 import {
-  takeLeading,
-  select,
   call,
-  spawn,
   join,
-  put
-} from 'redux-saga/effects';
-import { ActionTypes } from '../../constants';
-import { LoadNested, State, Comment } from '../../types';
-import sendRequest from '../../utils/sendRequest';
+  put,
+  select,
+  spawn,
+  takeLeading} from 'redux-saga/effects';
+
+import { ActionTypes } from '@/constants';
+import { Comment } from '@/interfaces';
+import sendRequest from '@/utils/sendRequest';
+
+import { LoadNested, State } from '../interfaces';
 
 let kids: number[] | undefined;
 
@@ -53,7 +55,7 @@ function* loadNestedCommentsSaga(action: LoadNested) {
   findAdInsertNested(comments, action.payload.comment);
 
   const nestedComments: Comment[] = [];
-  if (kids !== undefined) {
+  if (kids) {
     for (let i = 0; i < kids.length; i++) {
       const task: Task = yield spawn(loadComments, kids[i]);
       const nested: Comment = yield join(task);

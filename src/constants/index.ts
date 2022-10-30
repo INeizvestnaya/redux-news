@@ -11,3 +11,10 @@ export enum ActionTypes {
   LOAD_NESTED_COMMENTS = 'LOAD_NESTED_COMMENTS',
   SET_NESTED_COMMENTS = 'SET_NESTED_COMMENTS'
 }
+
+export enum PATHS {
+  INITIAL = '/',
+  MAIN = '/redux-news',
+  NEWS = '/news/:id',
+  OTHER = '/*'
+}

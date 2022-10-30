@@ -1,14 +1,16 @@
-import { useEffect, useRef, useContext } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import ThemeContext from '../../context';
-import { useTypedSelector } from '../../redux';
-import { ActionTypes } from '../../constants';
-import LoadingSpinner from '../../components/LoadingSpinner';
-import Comment from '../../components/Comment';
-import HeaderBar from '../../components/HeaderBar';
-import HeaderButton from '../../components/HeaderButton';
+
+import Comment from '@/components/Comment';
+import HeaderBar from '@/components/HeaderBar';
+import HeaderButton from '@/components/HeaderButton';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import { PATHS } from '@/constants';
+import ThemeContext from '@/context';
+import { useTypedSelector } from '@/hooks';
+import { loadComments, loadNestedComments } from '@/redux/actions';
+import representDate from '@/utils/representDate';
 
 const NewsPage = () => {
   const dispatch = useDispatch();
@@ -21,17 +23,13 @@ const NewsPage = () => {
 
   const intervalId = useRef<number>(0);
 
-  const loadComments = () =>
-    dispatch({
-      type: ActionTypes.LOAD_NEWS_PAGE,
-      payload: { newsId: +location.pathname.split('/')[2] }
-    });
+  const loadCommentsHandler = () => dispatch(loadComments(location));
 
   useEffect(() => {
-    loadComments();
+    loadCommentsHandler();
 
     intervalId.current = window.setInterval(() => {
-      loadComments();
+      loadCommentsHandler();
     }, 60000);
 
     return () => {
@@ -39,36 +37,31 @@ const NewsPage = () => {
     };
   }, []);
 
-  const reloadComments = () => loadComments();
-
-  const changeTheme = () => theme.changeTheme();
-
   const openNestedComments = (comment: number) =>
-    dispatch({
-      type: ActionTypes.LOAD_NESTED_COMMENTS,
-      payload: { comment }
-    });
+    dispatch(loadNestedComments(comment));
 
-  return loading === true ? (
-    <LoadingSpinner />
-  ) : (
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
+  return (
     <>
       <HeaderBar title={title}>
-        <HeaderButton extraProps={{ onClick: changeTheme }}>
+        <HeaderButton extraProps={{ onClick: theme.changeTheme }}>
           Change theme
         </HeaderButton>
-        <HeaderButton extraProps={{ onClick: reloadComments }}>
+        <HeaderButton extraProps={{ onClick: loadCommentsHandler }}>
           Reload
         </HeaderButton>
-        <a href="/redux-news" style={{ textDecoration: 'none' }}>
+        <a href={PATHS.MAIN} className="text-decoration-none">
           <HeaderButton>Back</HeaderButton>
         </a>
       </HeaderBar>
-      <div
+      <p
         className={`mx-5 mt-3 fs-3 ${theme.theme.mainText}`}
-      >{`"${title}" by ${by}`}</div>
+      >{`"${title}" by ${by}`}</p>
       <div className={`mx-5 mb-2 fs-5 text-end ${theme.theme.mainText}`}>
-        {new Date(time * 1000).toDateString()}
+        {representDate(time)}
       </div>
       <Button
         variant={theme.theme.mainButton}
@@ -76,15 +69,14 @@ const NewsPage = () => {
       >
         <a
           href={url}
-          className={theme.theme.mainText}
-          style={{ textDecoration: 'none' }}
+          className={`${theme.theme.mainText} text-decoration-none`}
         >
           Open news
         </a>
       </Button>
-      <div
+      <p
         className={`m-3 fs-4 mx-4 ${theme.theme.mainText}`}
-      >{`Comments (${descendants}): `}</div>
+      >{`Comments (${descendants}): `}</p>
       {comments?.map((comment) => (
         <Comment
           key={comment.id}

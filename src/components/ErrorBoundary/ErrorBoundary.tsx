@@ -26,7 +26,7 @@ class ErrorBoundary extends React.Component<
 
   render() {
     return this.state.isError ? (
-      <div className="text-center fs-2 m-4">Error! Reload the page</div>
+      <p className="text-center fs-2 m-4">Error! Reload the page</p>
     ) : (
       this.props.children
     );

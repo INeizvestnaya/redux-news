@@ -1,13 +1,14 @@
-import { useEffect, useRef, useContext } from 'react';
+import { useCallback, useContext, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import ThemeContext from '../../context';
-import { useTypedSelector } from '../../redux';
-import { NewsType } from '../../types';
-import { ActionTypes } from '../../constants';
-import NewsList from '../../components/NewsList';
-import LoadingSpinner from '../../components/LoadingSpinner';
-import HeaderBar from '../../components/HeaderBar';
-import HeaderButton from '../../components/HeaderButton';
+
+import HeaderBar from '@/components/HeaderBar';
+import HeaderButton from '@/components/HeaderButton';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import NewsList from '@/components/NewsList';
+import ThemeContext from '@/context';
+import { useTypedSelector } from '@/hooks';
+import { NewsType } from '@/interfaces';
+import { loadNews } from '@/redux/actions';
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -17,40 +18,38 @@ const Main = () => {
 
   const intervalId = useRef<number>(0);
 
-  const loadNews = () => dispatch({ type: ActionTypes.LOAD_NEWS });
+  const loadNewsHandler = useCallback(() => dispatch(loadNews()), []);
 
   const theme = useContext(ThemeContext);
 
   useEffect(() => {
-    loadNews();
+    loadNewsHandler();
 
     intervalId.current = window.setInterval(() => {
-      loadNews();
+      loadNewsHandler();
     }, 60000);
 
     return () => {
       clearInterval(intervalId.current);
     };
-  }, []);
-
-  const reloadNews = () => loadNews();
-
-  const changeTheme = () => theme.changeTheme();
+  }, [loadNewsHandler]);
 
   return (
     <>
       <HeaderBar title="Hacker news">
-        <HeaderButton extraProps={{ onClick: changeTheme }}>
+        <HeaderButton extraProps={{ onClick: theme.changeTheme }}>
           Change theme
         </HeaderButton>
-        <HeaderButton extraProps={{ onClick: reloadNews }}>Reload</HeaderButton>
+        <HeaderButton extraProps={{ onClick: loadNewsHandler }}>
+          Reload
+        </HeaderButton>
       </HeaderBar>
-      {loading === true ? (
+      {loading ? (
         <LoadingSpinner />
       ) : (
         news
           .sort((a, b) => b.time - a.time)
-          .map((news: NewsType) => <NewsList {...news} key={Math.random()} />)
+          .map((news: NewsType) => <NewsList {...news} key={news.id} />)
       )}
     </>
   );
